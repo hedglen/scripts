@@ -170,6 +170,45 @@ foreach ($c in $checks) {
     }
 }
 
+Step "Checking git repo health"
+
+$gitRepos = @(
+    "dotfiles",
+    "scripts",
+    "docs",
+    "hedglen-profile",
+    "mpv-config",
+    "projects",
+    "projects\media-organizer",
+    "projects\ytdl"
+)
+
+foreach ($r in $gitRepos) {
+    $repoPath = Join-Path $root $r
+    $name     = Split-Path $r -Leaf
+    if (-not (Test-Path $repoPath)) {
+        Warn "$name not found at $repoPath"
+        continue
+    }
+    $gitDir = Join-Path $repoPath ".git"
+    if (-not (Test-Path $gitDir)) {
+        Warn "${name}: directory exists but is not a git repo"
+        continue
+    }
+    try {
+        Push-Location $repoPath
+        $dirty = git status --porcelain 2>$null
+        if ($dirty) {
+            Warn "${name}: uncommitted changes"
+            $errors += "Dirty:${name}"
+        } else {
+            OK "${name}: clean"
+        }
+    } finally {
+        Pop-Location
+    }
+}
+
 Write-Host ""
 if ($errors.Count -eq 0) {
     Write-Host "============================================" -ForegroundColor Green
