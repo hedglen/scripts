@@ -178,7 +178,6 @@ $gitRepos = @(
     "docs",
     "hedglen-profile",
     "mpv-config",
-    "projects",
     "projects\media-organizer",
     "projects\ytdl"
 )
