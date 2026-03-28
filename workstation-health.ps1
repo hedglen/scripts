@@ -152,6 +152,10 @@ $checks = @(
         path = "$HOME\AppData\Roaming\Code\User\settings.json"
     },
     @{
+        desc = "Cursor settings"
+        path = "$HOME\AppData\Roaming\Cursor\User\settings.json"
+    },
+    @{
         desc = "Windows Terminal settings"
         path = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
     }
