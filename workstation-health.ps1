@@ -158,6 +158,10 @@ $checks = @(
     @{
         desc = "Windows Terminal settings"
         path = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+    },
+    @{
+        desc = "WezTerm config"
+        path = "$HOME\.wezterm.lua"
     }
 )
 
